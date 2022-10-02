@@ -3,7 +3,7 @@ import time
 
 import sys
 import pygame as pg
-from pygame.locals import *
+#from pygame.locals import *
 import model
 import botAI
 import view
@@ -29,8 +29,8 @@ def user_click():
     elif (y < settings.screen_height):
         row = 2
     else:
-        row = 0
-    if (col + row) == 0:
+        row = -1
+    if (col == 0) and (row == -1):
         return 0
     else: return row * 3 + col
 
@@ -57,26 +57,27 @@ def run():
 
     while game_result == 'None':
         for event in pg.event.get():
-            if event.type == QUIT:
+            if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
-            elif event.type is MOUSEBUTTONDOWN:
-                user_click()
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                print(user_click())
+
         ###############PrintField(field)
-        if x_turn:
-            view.draw_status(screen, 'Ходят X')
-            if bot_play_X:
-                field = field.replace(botAI.get_bot_turn(field, 'X', settings.bot_algorithm), 'X')  # бот сходил за X
-            else:
-                field = field.replace(MyInput(field), 'X')  # чел сходил за X
-        else:
-            view.draw_status(screen, 'Ходят 0')
-            if not bot_play_X:
-                field = field.replace(botAI.get_bot_turn(field, 'O', settings.bot_algorithm), 'O')  # бот сходил за O
-            else:
-                field = field.replace(MyInput(field), 'O')  # чел сходил за O    game_result = MyCheckGame(field)
-        game_result = botAI.MyCheckGame(field)  # проверяем, чего там с результатом игры
-        x_turn = not x_turn
+        # if x_turn:
+        #     view.draw_status(screen, 'Ходят X')
+        #     if bot_play_X:
+        #         field = field.replace(botAI.get_bot_turn(field, 'X', settings.bot_algorithm), 'X')  # бот сходил за X
+        #     else:
+        #         field = field.replace(MyInput(field), 'X')  # чел сходил за X
+        # else:
+        #     view.draw_status(screen, 'Ходят 0')
+        #     if not bot_play_X:
+        #         field = field.replace(botAI.get_bot_turn(field, 'O', settings.bot_algorithm), 'O')  # бот сходил за O
+        #     else:
+        #         field = field.replace(MyInput(field), 'O')  # чел сходил за O    game_result = MyCheckGame(field)
+        # game_result = botAI.MyCheckGame(field)  # проверяем, чего там с результатом игры
+        # x_turn = not x_turn
 
         pg.display.update()
         CLOCK.tick(settings.fps)
