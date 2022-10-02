@@ -5,3 +5,24 @@
 # в имеющейся последовательности. Для построения словаря создайте функцию count_it(sequence),
 # принимающую строку из цифр. Функция должна возвратить словарь из 3-х самых часто встречаемых чисел.
 
+from random import randint, seed
+
+def count_it(s:str)->dict:
+    ret = {}
+    for i in s.split(" "): # формируем словарь с частотой появления чисел
+        if int(i) in ret: ret[int(i)] += 1
+        else: ret[int(i)] = 1
+    ret = dict(sorted(ret.items(), key = lambda item: item[1], reverse = True)) # сортировка
+    return dict((key,value) for (key,value) in list(ret.items())[:3]) # выдаем первыые 3 элемента
+
+seed(5)
+# Строка для проверки
+my_string = " ".join([str(randint(0,9)) for _ in range(randint(10,20))])
+print(my_string)
+print(count_it(my_string))
+
+##########################################################
+################## Вывод результата ######################
+##########################################################
+# 4 5 8 0 7 3 0 2 1 5 7 3 6 8 1 9 3 0 3
+# {3: 4, 0: 3, 5: 2}

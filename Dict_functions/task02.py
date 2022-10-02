@@ -8,10 +8,16 @@
 my_dict = {'first_one': 'we can do it'}
 
 def biggest_dict(**kwargs):
-    global my_dict
+    global my_dict  # работчаем с внешней переменной
     for (key,value) in kwargs.items():
         my_dict[key]=value
 
 print(my_dict)
 biggest_dict(one='1', two='2', three='3', four=4, five=5)
 print(my_dict)
+
+##########################################################
+################## Вывод результата ######################
+##########################################################
+# {'first_one': 'we can do it'}
+# {'first_one': 'we can do it', 'one': '1', 'two': '2', 'three': '3', 'four': 4, 'five': 5}

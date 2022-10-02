@@ -49,12 +49,15 @@ def run():
 
     view.game_initiating_window(screen)
     game_result = 'None'
-    x_turn = settings.x_turn
-    bot_play_X = settings.bot_play_X
+    # x_turn = settings.x_turn
+    # bot_play_X = settings.bot_play_X
     model.init()
 
+    x_turn = True if view.my_question(screen,'Кто ходит первым?','Х','0') == 1 else False
+    x_play_X = True if view.my_question(screen,'За кого играет БОТ?','Х','0') == 1 else False
 
-
+    view.draw_status(screen, 'Ходят X')
+    pg.display.update()
     while game_result == 'None':
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -63,7 +66,7 @@ def run():
             elif event.type == pg.MOUSEBUTTONDOWN:
                 print(user_click())
 
-        ###############PrintField(field)
+        PrintField(field)
         # if x_turn:
         #     view.draw_status(screen, 'Ходят X')
         #     if bot_play_X:
