@@ -1,7 +1,4 @@
-
-x_turn = True
-bot_play_X = False
-bot_algorithm = 3
+# настройки всякие
 
 screen_width = 400
 screen_height = 400
